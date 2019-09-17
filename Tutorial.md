@@ -1,11 +1,14 @@
 <img src="https://github.com/mjdanielson/University-of-Buffalo/blob/master/Labs/Choropleth-Map/Images/Logo.png">
 
-
 <h1 align="center"> Happy GIS Day! </h1>
 
 如果你是 GIS 专业的同学，一定对 John Snow 这个名字不陌生，他是英国著名内科医生，为霍乱的研究作出重大贡献。
 
 这节课我们一起试试使用 Mapbix Studio 和 Mapbox GL JS 重建 John Snow 在研究 1854 伦敦霍乱爆发使用的空间分析地图。
+
+<p align="center">
+  <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/broad-street-pump2.jpg">
+  </p>
 
 <p align="center"> <i> 1854 伦敦霍乱爆发 </i> </p>
 <h2 align="center"> <strong> John Snow 是谁? </strong></h2>
@@ -95,32 +98,31 @@ John Snow 博士被认为是现代流行病学的先驱之一，部分原因是�
 
 ## 在样式地图中[管理并编辑图层](https://www.mapbox.com/studio-manual/reference/styles/#style-editor)
 
-Click the Style tab and the map will switch back to style mode displaying your new layer. You will see the point data on the map with a default style (black with 100% opacity). 
+单击“Style”选项卡，地图将切换回显示新图层的样式模式。您将在地图上看到具有默认样式的点数据（黑色，100％不透明度）。
 
-In the Mapbox Studio style editor, you create graduated points based on the number of cholera deaths by increasing or decreasing the radius size of the points. Change the name of your data layer to 'Cholera Death' and select __radius__ ,  __style across a data range__ and then select the __Deaths #__ field.
+在 Mapbox Studio 样式编辑器中，您可以通过增加或减少点的半径大小来创建渐变点，用来表示霍乱死亡的人数。更改数据层的名称为'Cholera Death' 并选择  __radius__ ,  __style across a data range__ 和 __Deaths #__ 域.
 
 <p align = "center">
   <img src= "https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Style_Radius.gif">
 </p>
 
+变化率（The rate of change）这里我们可以设置成 __Linear__。
 
-The rate of change should be set to __Linear__.
-
-Now it's time to start adding stops! You will create several stops to break the cholera death data up into groups. We will be breaking the data out into 5 classes.
+现在我们给数据添加一些分级点，这样可以将 cholera death 数据分组，在这里我们按照数量的多少分成了五组，为每一组设置不同的半径大小。
 
 <p align = "center">
   <img src ="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Cholera_Deaths_1.png">
   </p>
   
-Once you've finished creating your graduated points, add the Cholera Pumps data to the map twice. Rename one layer 'Pumps' and the other 'Pumps Outline'.
+完成创建分级点后，我们将 Cholera Pumps 数据两次添加到地图上。重命名一层'Pumps'和另一层'Pumps Outline'。
 
-Change the radius of the 'Pumps' layer to 4 and change the color to #7f0101. 
+将“Pumps”图层的半径更改为4，并将颜色更改为＃7f0101。
 
 <p align = "center">
   <img src ="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Pumps_Layer.png">
   </p>
   
-Next, increase the radius of the 'Pumps Outline' layer to 6, change the color to #000000 and the stroke color to #7f0101. 
+接下来，将'Pumps Outline' 层的半径增加到 6, 将颜色改为 #000000，并设置 stroke color 为 #7f0101. 
 
 <p align = "center">
   <img src ="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Pumps_Outline.png">
@@ -128,26 +130,26 @@ Next, increase the radius of the 'Pumps Outline' layer to 6, change the color to
   
 
   
-## Publish your style 
+## 发布你的样式 
 
-Now that you've got your map looking good, it's time to publish! Click the Publish style button at the top of the toolbar on the right side of the screen, then click Publish again on the next prompt.
+现在你的地图看起来很好，是时候发布了！单击屏幕右侧工具栏顶部的“Publish”按钮，然后在下一个提示中再次单击“Publish”。
 
-Hooray! Your style is now published! If you go back to your Styles page, you will see your new style at the top of the list.
+万岁！你的风格现已发布！如果你返回“Style”页面，您将在列表顶部看到新样式。
 
-You can use your ‘Share URL’ to open your style in a new browser tab and share it with collaborators for review.
+你可以使用“Share URL”在新的浏览器标签中打开你的样式，并与协作者共享以供审核。
 
 
-## Create a web map 
+## 制作网页在线地图 
 
-Now that we have edited our layers and created a style, let's create a web map! 
+现在我们已经编辑了图层并创建了一个样式，让我们创建一个网页版的在线地图！
 
-For this part of the lesson, we will be using a program called JSFiddle. You can sign up for a free acount at: https://jsfiddle.net/
+对于本课程的这一部分，我们将使用一个名为 JSFiddle 的工具。您可以在以下网址注册免费账号：https：//jsfiddle.net/
 
-JSFiddle is a simple tool for building and testing code for web development. We recommend using JSFiddle in a Chrome browser
+JSFiddle 是一个用于构建和测试 Web 开发代码的简单工具。我们建议在 Chrome 浏览器中使用 JSFiddle。
 
-For simplicity, we recommend that you change the editor layout settings in JSFiddle to display by ‘tabs’.
+为简单起见，我们建议您更改 JSFiddle 中的编辑器布局设置以通过“tabs”显示。
 
-Initialize your map by copying the following code into the HTML tab of your JSFiddle:
+通过将以下代码复制到 JSFiddle 的HTML选项卡中来初始化地图：
 
 ```
 <!DOCTYPE html>
@@ -182,16 +184,16 @@ Initialize your map by copying the following code into the HTML tab of your JSFi
 
 ```
 
-### Add a title and info box(front-end UI):
+### 添加标题和信息框(前端 UI):
 
-Add the following code between the <body> opening and </body> closing tags:
+在 <body> 和 </body> 之间添加下面的代码:
 
 ```
 <div id='map'></div>
 <div class='map-overlay' id='features'> <h2>Broad Street, 1854</h2></div>
 ```
 
-Next, you will also want to apply some CSS to visualize what the layout looks like. This creates the visual rules for our front-end elements (legend, title box, information box). Under the opening ```<style>``` tag at the top of your code, add the following: 
+接下来，您还需要应用一些CSS来可视化布局的外观。这为我们的前端元素（图例，标题框，信息框）创建了可视化规则。在代码顶部的开头```<style>```标签下，添加以下内容：
   
 ```  
 h2,
@@ -254,15 +256,13 @@ p {
 
 ```
 
-Hit run to see your changes. 
+点击运行看看效果吧！ 
 
-In the next step, you will add the map to your page and the project will start taking shape.
+下一步，我们将把地图添加到页面中，项目将开始成型了。
 
-### Initialize the map 
+### 初始化地图 
 
-For the next step you will need a [Mapbox access token](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/) and your [style ID](https://docs.mapbox.com/help/glossary/style-id/). Without this, the rest of the code will not work. 
-
-For the next step you will need a [Mapbox access token](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/) and your [style ID](https://docs.mapbox.com/help/glossary/style-id/). Without this, the rest of the code will not work. 
+这一步你需要一个 [Mapbox access token](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/) 以及 [style ID](https://docs.mapbox.com/help/glossary/style-id/). 否则下面的代码就没办法正常工作了。
 
 <p align = "center">
   <img src="https://github.com/mjdanielson/University-of-Buffalo/blob/master/Labs/Choropleth-Map/Images/Access_Token.png">
@@ -272,7 +272,7 @@ For the next step you will need a [Mapbox access token](https://docs.mapbox.com/
 <img src="https://github.com/mjdanielson/University-of-Buffalo/blob/master/Labs/Choropleth-Map/Images/Style_ID.gif">
 </p>
 
-Add the following code after <div class='map-over' id='legend'></div> and before the closing </body> tag
+在 <div class='map-over' id='legend'></div> 和 </body> 之间加入下面的代码。
 
 ```
 <script>
@@ -286,38 +286,38 @@ var map = new mapboxgl.Map({
 </script>
 ```
 
-Add your style id to the map variable. Edit the line of code that has the comment 'replace this with your style URL'.
+将你的 style id 加到相应区域，如下所示。
 
 ```
 style: 'your-style-url', // replace this with your style URL
 ```
 
-Next, we want to center our map on our data. Locate the line of code that is telling the map where to center the view. Try changing the center location by picking a new coordinate using http://geojson.io/ (or looking at the bottom of the right-hand panel in the Mapbox Studio style editor). Change the coordinates in your code and run your changes.
+接下来，我们希望将地图集中在我们的数据位置。找到告诉地图将视图居中的位置的代码行。尝试使用http://geojson.io/（或在 Mapbox Studio 样式编辑器中查看右侧面板的底部）选择一个新坐标来更改中心位置。更改代码中的坐标并运行更改。
 
 ```
 center: [,], // starting position [lng, lat] 
 ```
 
-Change the zoom level to 15.5.
+将缩放值改为 15.5.
 
 ```
 zoom: 3 // starting zoom - change the starting zoom position to 15.5
 ```
 
-Hit run to see your changes. 
+点击运行查看结果！
 
 <p align="center">
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Map-V1.png">
   </p>
 
-### Add additional information
+### 增加额外的信息
 
-With some projects, this is where you'd stop: you put a map on a page! But for this map, you will add two pieces of additional information that will make the map even more useful: an information window that gives the user a brief history of the cholera outbreak of 1854 and a pop up that displays the number of cholera deaths for whatever graduated point the cursor is hovering on.
+对于某些项目，我们完成的就差不多了：在页面上放置地图！但是对于这张地图，你将添加两条额外的信息，使地图更有用：一个信息窗口，向用户提供1854年霍乱爆发的简要历史记录，以及在光标悬停在渐变点上的时候，显示霍乱死亡人数的弹出窗口。
 
-### Add the information box 
+### 增加信息窗口
 
-Add the following code to your <div> element containing your map overlay class. This text should go after your 'Broad Street, 1854' header. 
-  
+将以下代码添加到包含地图覆盖类的 <div> 元素中。这段文字应该在你的'Broad Street，1854'标题之后。
+	
   
 ```
 <p>During the mid-1800’s in London, Dr. John Snow mapped all the occurrences of cholera by home address, as well as the location of public water pumps. </p>
@@ -325,17 +325,17 @@ Add the following code to your <div> element containing your map overlay class. 
 </p>
 ```
 
-### [The load event](https://docs.mapbox.com/help/tutorials/choropleth-studio-gl-pt-2/#the-load-event)
+### [加载事件](https://docs.mapbox.com/help/tutorials/choropleth-studio-gl-pt-2/#the-load-event)
 
-What is a callback?
+什么是回调？
 
-Initializing the map on the page does more than create a container in the map div. It also tells the browser to request the Mapbox Studio style you created in part 1. This can take variable amounts of time depending on how quickly the Mapbox server can respond to that request, and everything else you're going to add in the code relies on that style being loaded onto the map. As such, it's important to make sure the style is loaded before any more code is executed.
+在页面上初始化地图不仅仅是在地图 div 中创建容器。它还告诉浏览器请求您在第1部分中创建的 Mapbox Studio 样式。这可能需要不同的时间，具体取决于 Mapbox服务器响应该请求的速度，以及您要在代码中添加的所有其他内容依赖将该样式加载到地图上。因此，在执行任何更多代码之前确保加载样式非常重要。
 
-Fortunately, the map object can tell your browser about certain events that occur when the map's state changes. One of these events is load, which is emitted when the style has been loaded onto the map. Through the map.on method, you can make sure that none of the rest of your code is executed until that event occurs by placing it in a [callback function](https://github.com/maxogden/art-of-node#callbacks) that is called when the load event occurs.
+幸运的是，地图对象可以告诉您的浏览器有关地图状态发生变化时发生的某些事件。其中一个事件是 load，它在样式加载到地图时发出。通过 map.on 方法，您可以通过将其置于[回调函数]（https://github.com/maxogden/art-of-node）来确保在该事件发生之前不会执行其余任何代码。 #callbacks）在 load事 件发生时调用。
 
-To make sure the rest of the code can execute, it needs to live in a callback function that is executed when the map is finished loading.
+为了确保代码的其余部分可以执行，它需要存在于地图加载完成时执行的回调函数。
 
-Add the load event before the closing script tag </script>
+在结束脚本标记</ script>之前添加load事件
 
 ```
 map.on('load', function() {
@@ -344,11 +344,11 @@ map.on('load', function() {
 ```
 
 
-### Add a popup! 
+### 添加弹窗！
 
-When the cursor is hovering over a graduate point a popup will display the number of cholera related deaths recorded in that region. 
+当光标悬停在渐变点上时，弹出窗口将显示该区域记录的霍乱相关死亡人数。
 
-To do this, add a listener for the mousemove event, identify which graduated point is at the location of the cursor if any, and create a popup:
+为此，为 mousemove 事件添加一个监听器，识别哪个渐变点位于光标位置（如果有），并创建一个弹出窗口：
 
 ```
 var features = map.queryRenderedFeatures(e.point, {
@@ -395,9 +395,9 @@ map.getCanvas().style.cursor = '';
 ```
 
 
-### Mission Complete!
+### 任务完成！
 
-You have successfully recreated John Snow's famous map! Congratulations and happy GIS day! The final map can be accessed [here](https://mjdanielson.github.io/Cholera-Map/). 
+你已经成功重建了一个 John Snow 最著名的地图！恭喜！可以到 [这里](https://mjdanielson.github.io/Cholera-Map/) 体验一下最终的成品。记得分享给的你同学哦。
 
 
 <p align="center">
