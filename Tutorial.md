@@ -3,102 +3,97 @@
 
 <h1 align="center"> Happy GIS Day! </h1>
 
+如果你是 GIS 专业的同学，一定对 John Snow 这个名字不陌生，他是英国著名内科医生，为霍乱的研究作出重大贡献。
 
-In celebration of GIS Day, we thought it would be fun to recreate John Snow's 1854 map of cholera outbreaks in London using Mapbox Studio and GL-JS!
+这节课我们一起试试使用 Mapbix Studio 和 Mapbox GL JS 重建 John Snow 在研究 1854 伦敦霍乱爆发使用的空间分析地图。
 
-<p align="center">
-  <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/broad-street-pump2.jpg">
-  </p>
-
-<p align="center"> <i> 1854 London cholera outbreak </i> </p>
-
-<h2 align="center"> <strong> Who is John Snow you ask? </strong></h2>
-
+<p align="center"> <i> 1854 伦敦霍乱爆发 </i> </p>
+<h2 align="center"> <strong> John Snow 是谁? </strong></h2>
 <p align="center">
 <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Dr_John_Snow.jpg"> 
 </p> 
 
+John Snow 博士被认为是现代流行病学的先驱之一，部分原因是他在 1854 年伦敦霍乱爆发期间的开创性工作。在 1800 年代中期，流行的理论是这些爆发是由 Miasma（由于颗粒分解导致的空气中疾病传播）引起的。
 
-Dr. John Snow is considered one of the fathers of modern epidemiology, in part because of his pioneering work during the 1854 London cholera outbreak. During the mid-1800’s the prevailing theory was that these outbreaks were caused by miasma (the spread of disease in the air due to decomposing particles). However, Snow was skeptical and mapped all the occurrences of cholera by home address (marked by the stacked black bars) as well as the location of public water pumps. By analyzing the spatial pattern, Snow was able to determine the water pump on Broad Street was the source of the outbreak.
+然而，John Snow 持怀疑态度。他根据家庭住址以及公共水泵的位置，将霍乱事件绘制在地图上。通过分析空间格局，他最终确定 Broad Street 上的水泵是霍乱爆发的源头。
 
+这张地图就是我们今天要学习绘制的 1854 伦敦霍乱爆发地图。
 
-<h1 align="center"> Mapping the 1854 London cholera outbreak tutorial</h1>
+<h1 align="center"> 1854 伦敦霍乱爆发地图制作教程 </h1>
 
-In this tutorial you will:
+在本教程中，您将会学习到：
 
-* Upload data as a tileset
-* [Create a style](https://docs.mapbox.com/help/how-mapbox-works/map-design/#how-map-styles-work) for a basemap using [Cartogram](https://apps.mapbox.com/cartogram/#13.01/40.7251/-74.0051)
-* [Add data](https://www.mapbox.com/help/uploads/) to a style
-* [Manage and edit layers](https://www.mapbox.com/studio-manual/reference/styles/#style-editor) in your style
-* Create a web map 
-* Add basic interactivity to your map 
+* 上传数据并作矢量切片
+* 使用 [Cartogram](https://apps.mapbox.com/cartogram/#13.01/40.7251/-74.0051) 获得相应的[地图样式](https://docs.mapbox.com/help/how-mapbox-works/map-design/#how-map-styles-work) 作为底图
+* 在样式地图上[添加数据](https://www.mapbox.com/help/uploads/) to a style
+* 在样式地图上[管理并编辑图层](https://www.mapbox.com/studio-manual/reference/styles/#style-editor) in your style
+* 制作一张网页端在线地图
+* 在地图上添加基本的交互
 
-## Software requirements
+## 软件准备
 
-* Mapbox account
-* JSFiddle 
+* Mapbox 账户，可以在 Mapbox.com 进行免费注册
+* JSFiddle，实时显示 JS 代码前端效果的神奇工具
 
-## Data
+## 数据准备
 
-* [Cholera deaths](https://github.com/mjdanielson/Cholera-Map/blob/master/Data/Cholera_Deaths.geojson): Number of deaths attributed to cholera in 1854 by location. 
+* [Cholera deaths](https://github.com/mjdanielson/Cholera-Map/blob/master/Data/Cholera_Deaths.geojson): 1854 年因霍乱去世，按位置分布的人数 geojson 文件。
 
-* [Location of pumps](https://github.com/mjdanielson/Cholera-Map/blob/master/Data/Cholera_Pumps.geojson)
+* [Location of pumps](https://github.com/mjdanielson/Cholera-Map/blob/master/Data/Cholera_Pumps.geojson)：水泵的位置 geojson 文件。
 
-## Upload data as a tileset
+## 上传数据并作矢量切片
 
-Let's upload our data to the [tileset editor](https://studio.mapbox.com/tilesets/).  At the top of the tileset editor page, select
-  <img src="https://github.com/mjdanielson/University-of-Buffalo/blob/master/Labs/Choropleth-Map/Images/Tileset.png" title="Tileset Upload">. Select __Upload File__ and __Select a file__ and navigate to the file containing your census data tracts GeoJSON and select __Confirm__. 
+我们可以把数据上传到 [tileset editor](https://studio.mapbox.com/tilesets/) 中. 在 tileset editor 页面顶部，选择
+  <img src="https://github.com/mjdanielson/University-of-Buffalo/blob/master/Labs/Choropleth-Map/Images/Tileset.png" title="Tileset Upload">。 选择 __Upload File__ 和 __Select a file__ 导航到相应文件的位置，选择人口数据 GeoJSON 文件，点击 __Confirm__. 
 
   <p align= 'center'>
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Screen%20Shot%202019-09-05%20at%204.11.18%20PM.png" title="Tileset1">
   </p>
 
-When you upload vector data to your Mapbox account, our servers convert it to a [vector tileset](https://docs.mapbox.com/help/glossary/tileset/) so it can be rendered quickly and efficiently in the Mapbox Studio style editor and with Mapbox GL JS. The tileset information page shows some useful information about the tileset that was created from your uploaded data. Feel free to explore the information page for each of your new tilesets. 
+当你在 Mapbox account 中上传矢量数据时，我们的服务器会将其转换为 [vector tileset](https://docs.mapbox.com/help/glossary/tileset/) 以便在 Mapbox Studio 样式编辑器和 Mapbox GL JS 中快速有效地呈现它。 tileset 信息页面显示了一些有关从您上传的数据创建的 tileset 的有用信息。可以登陆上去随便看看每个新 tileset 的信息页面。
 
-Upload the Cholera_Pump.geojson as a tileset. 
+将 Cholera_Pump.geojson 上传并自动转化为 tileset. 
 
 
-## Create a style for a basemap using Cartogram 
+## 使用 Cartogram 创建底图样式
   
-After you've inspected your data, it's time to create a new style so you can put it on the map! Go to the [Cartogram homepage](https://apps.mapbox.com/cartogram/#13.01/40.7251/-74.0051). Find a picture of John Snow's Broad Street Map that you like and upload to Cartogram. For this tutorial, we will be using the image below. 
+数据上传后，我们还需要一个新的地图样式来放置这些数据！到 [Cartogram 主页](https://apps.mapbox.com/cartogram/#13.01/40.7251/-74.0051) 中. 我们可以找一张 John Snow 的 Broad Street Map，并传到 Cartogram 中。你可以用下面这张图来做测试。
 
 <p align="center">
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/broadstreet(source13)-large.jpg" width="500" height="474" title="Broad Street Pump"> 
 </p>
 
-Once you've uploaded your photo to Cartogram, start playing around with the settings for your buildings, land, font, and streets until you have your desired basemap style. 
-
+往 Cartogram 中上传了照片后，可以微调建筑、土地、字体和街道的风格，直到你满意为止。
 
 <p align="center">
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/cartogram.gif" width="576" height="261.6">
   </p>
    
- 
-When you've finished, select <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/saved_style.png" width="148" height="20"> at the top of the screen. This should automatically take you to the Mapbox Studio editor. 
+调整好以后，选择屏幕顶部的 <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/saved_style.png" width="148" height="20"> 。这样就可以自动在 Mapbox Studio 里面打开你刚调整后的样式，可以进行进一步编辑。
 
-In the style editor, change the rename your Style. In this example, the Style name has been changed to 'John Snow Cholera'. 
+在 Mapbox Studio 中，可以重命名你的 Style 名字。我们在这里把 Style 的名字重新命名为 'John Snow Cholera'. 
 
 <p align="center">
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Style_Name.png">
   </p>
 
-### [Add data](https://www.mapbox.com/help/uploads/) to a style
+### 在地图样式上 [添加数据](https://www.mapbox.com/help/uploads/)
 
-To add and style the Cholera deaths data, you will need to add a new layer to the map. At the top of the layer panel, click <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Add_Layer.png">
+为了在地图上添加 Cholera deaths 数据, 你需要新增一个图层。在编辑器左侧的 layer 面板中，点击 <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Add_Layer.png">。
 
 <p align="center">
   <img src="https://github.com/mjdanielson/Cholera-Map/blob/master/Images/Add_Layer.gif">
   </p>
 
-The editor is now showing your map in “x-ray mode.” X-ray mode shows all the data in the sources added to the style, regardless of whether there is a layer to style it.
+现在就像拍了X光片一样，地图进入了“x-ray 模式。” X-ray 模式可以显示所有将会被加到地图上的数据源，无论有没有样式。
 
-In the New layer panel, look in the list of Data sources for the Cholera Deaths source. Click the tileset and then select the source layer as the source for this new style layer.
+在 New layer 面板中，查看 Cholera Deaths 的数据源列表。单击 tileset，然后选择源图层作为此新样式图层的源。
 
-The default Basic map view is not centered on London, England. Mapbox Studio recognizes that the data you have uploaded is focused on a different location, so it displays the message "This tileset isn't available from your map view." Click Go to data, and the map view will refocus on the United States. Zoom to your layer (London, England).
+默认的基本地图视图不以英格兰伦敦为中心。 Mapbox Studio 会识别您上传的数据集中在不同的位置，因此会显示消息“This tileset isn't available from your map view”。单击转到数据，地图视图将重新聚焦美国，并缩放到您的图层（伦敦，英格兰）。
 
-Each layer in Studio can be styled individually by clicking on the name of the layer in the Layer list. There are several layer types to choose from. Each layer type has a unique set of layer properties that can be specified. There are a few options for specifying property values. You can pick values individually, based on a data attribute, based on the zoom level, or the value of another property. For more information on layer types and their styling rules check out this [reference guide](https://docs.mapbox.com/studio-manual/reference/styles/).
+通过单击“图层”列表中图层的名称，可以单独设置 Studio 中的每个图层的样式。有几种图层类型可供选择。每个图层类型都有一组可以指定的唯一图层属性。有几个选项可用于指定属性值。您可以根据数据属性，基于缩放级别或其他属性的值单独选择值。有关图层类型及其样式规则的更多信息，请参阅[参考指南]（https://docs.mapbox.com/studio-manual/reference/styles/）。
 
-## [Manage and edit layers](https://www.mapbox.com/studio-manual/reference/styles/#style-editor) in your style
+## 在样式地图中[管理并编辑图层](https://www.mapbox.com/studio-manual/reference/styles/#style-editor)
 
 Click the Style tab and the map will switch back to style mode displaying your new layer. You will see the point data on the map with a default style (black with 100% opacity). 
 
